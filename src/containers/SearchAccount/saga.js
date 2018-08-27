@@ -7,7 +7,7 @@ function* getCurrency(token, name) {
 }
 
 function* getAccountDetail(name) {
-  console.log("tam_getAccountDetail ");
+  console.log("tam_getAccountDetail ", name);
 
 }
 
@@ -25,11 +25,12 @@ function* watchSeachPubkey() {
 // Get the EOS single account
 //
 function* performSearchAccount() {
+  console.log("tam_Get the EOS single account");
 
 }
 
 function* watchSeachAccount() {
-
+  yield takeLatest(LOOKUP_ACCOUNT, performSearchAccount);
 }
 
 //
