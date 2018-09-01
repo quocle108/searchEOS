@@ -18,22 +18,33 @@ import { makeSelectSearchAccounts, makeSelectSearchLoading } from './selectors';
 
 import TestForm from '../../components/testForm'
 import ShowForm from '../../components/showForm'
+import CircularProgress from '@material-ui/core/CircularProgress';
+
 
 import GridContainer from '../../components/GridContainer'
-
 function LoadingSpinner(props) {
   if (props.loading) {
-    return <div />;
+    return <CircularProgress color="secondary" />;
   }
   return '';
 }
 
 // eslint-disable-next-line react/prefer-stateless-function
 export class SearchAccount extends React.Component {
+  constructor(props, context){
+    super(props, context);
+    this.state = {
+      value: ''
+    };
+  }
+
+
   render() {
     return (
       <div>
         <TestForm{...this.props} />
+
+        <LoadingSpinner {...this.props} />
         <GridContainer>
           {this.props.accounts.map(account => {
 
@@ -45,7 +56,7 @@ export class SearchAccount extends React.Component {
         
       </div>
     );
-  }
+  };
 }
 
 const mapStateToProps = createStructuredSelector({
@@ -55,9 +66,11 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    // handleAccountName: form => dispatch(lookupAccount(form.name)),
-    handleAccountName: form => dispatch(lookupAccount("123eosgui123")),
-    handlePublicKey: form => dispatch(lookupPubkey(form.publicKey)),
+    handleAccountName: form => dispatch(lookupAccount(form)),
+    // handleAccountName: form => dispatch(lookupAccount("123eosgui123")),
+    // handlePublicKey: form => dispatch(lookupPubkey(form.publicKey)),
+
+    
   };
 }
 
