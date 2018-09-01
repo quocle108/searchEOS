@@ -3,7 +3,7 @@ import { makeSelectSearchName, makeSelectSearchPubkey } from './selectors';
 import { LOOKUP_ACCOUNT, LOOKUP_PUBKEY } from './constants';
 import { lookupLoading, lookupLoaded } from './actions';
 import Eos from 'eosjs';
-import {tokensUrl} from '../../remoteConfig'
+// import {tokensUrl} from '../../remoteConfig'
 
 const networkOptions = {
   broadcast: false,
@@ -47,7 +47,9 @@ function* getAccountDetail(name) {
 //
 function* performSearchAccount() {
   console.log("tam_Get the EOS single account");
-  const accountName = '123eosgui123';
+  // const accountName = '123eosgui123';
+  const accountName = yield select(makeSelectSearchName());
+  yield put(lookupLoading());
   try{
     const account = yield call(getAccountDetail, accountName);
     console.log("tam_return: ", account);
