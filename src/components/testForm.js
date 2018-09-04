@@ -62,7 +62,7 @@ class TestForm extends React.Component {
         />
 
         <button onClick={this.handleClick}>
-          Test Function
+          Search
       </button>
 
       </div>
