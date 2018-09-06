@@ -12,6 +12,7 @@ const initialState = fromJS({
   pubkey: '',
   loading: false,
   accounts: [],
+  history: [],
 });
 
 function SearchAccountReducer(state = initialState, action) {
@@ -23,10 +24,12 @@ function SearchAccountReducer(state = initialState, action) {
     case LOOKUP_LOADING:
       return state.set('loading', true);
     case LOOKUP_LOADED: {
-      const { accounts } = action;
+      const { accounts, historys } = action;
       // casting account in an array if API returned an object
       const accountState = Array.isArray(accounts) ? accounts : [accounts];
-      return state.set('accounts', accountState).set('loading', false);
+      const historysState = Array.isArray(historys) ? historys : [historys];
+
+      return state.set('accounts', accountState).set('loading', false).set('history', historysState);
     }
     default:
       return state;

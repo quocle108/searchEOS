@@ -12,6 +12,8 @@ import App from './containers/App/App'
 
 import configureStore from './configureStore';
 
+import SearchAccount from './containers/SearchAccount/index'
+
 // Create redux store with history
 const initialState = {};
 const history = createHistory();
@@ -22,7 +24,8 @@ const MOUNT_NODE = document.getElementById('root');
 ReactDOM.render(
     <Provider store={store}>
         <ConnectedRouter history={history}>
-            <App />
+            {/* <App /> */}
+            <SearchAccount/>
         </ConnectedRouter>
     </Provider>,
     MOUNT_NODE

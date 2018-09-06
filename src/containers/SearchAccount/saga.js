@@ -28,38 +28,53 @@ function* watchSeachPubkey() {
 }
 
 function* getAccountDetail(name) {
-  console.log("tam_getAccountDetail ", name);
+  console.log("tam _getAccountDetail: name = ", name);
   const networkReader = yield Eos(networkOptions);
 
-  console.log("tam_ getAccountDetail_networkReader ",networkReader);
-
   const account = yield networkReader.getAccount(name);
-  console.log("tam_ getAccountDetail_Account:", account);
+  console.log("tam_ getAccountDetail: Account:", account);
   return{
     ...account
   };
 }
 
+function* getHistory(name){
+  console.log("tam _getHistory: name = ", name);
+  const networkReader = yield Eos(networkOptions);
 
+  const history = yield networkReader.getActions(name);
+  console.log("tam_getHistory : history = ", history);
+
+  return{
+    ...history
+  };
+}
 
 //
 // Get the EOS single account
 //
 function* performSearchAccount() {
-  console.log("tam_Get the EOS single account");
-  // const accountName = '123eosgui123';
+  console.log("tam_ performSearchAccount");
+
+  // const accountName = 'starteosiobp';
   const accountName = yield select(makeSelectSearchName());
   yield put(lookupLoading());
   try{
     const account = yield call(getAccountDetail, accountName);
     console.log("tam_return: ", account);
 
-    yield put(lookupLoaded(account));
-  } catch (err) {
+    const history = yield call(getHistory, accountName);
+    console.log("tam_ get account starteosiobp", history);
+
+    yield put(lookupLoaded(account, history));
+
+  }catch (err) {
     console.error('An EOSToolkit error occured - see details below:');
     console.error(err);
     yield put(lookupLoaded([]));
   }
+
+
 }
 
 function* watchSeachAccount() {

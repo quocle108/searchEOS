@@ -14,10 +14,11 @@ import injectReducer from 'utils/injectReducer';
 import reducer from './reducer';
 import saga from './saga';
 import { lookupAccount, lookupPubkey } from './actions';
-import { makeSelectSearchAccounts, makeSelectSearchLoading } from './selectors';
+import { makeSelectSearchAccounts, makeSelectSearchLoading, makeSelectSearchHistory } from './selectors';
 
 import TestForm from '../../components/testForm'
 import ShowForm from '../../components/showForm'
+import ShowHistory from '../../components/showHistory'
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 
@@ -48,8 +49,18 @@ export class SearchAccount extends React.Component {
         <GridContainer>
           {this.props.accounts.map(account => {
 
-            console.log("tam_ LL ", account, account.account_name, JSON.stringify(account, null, 2));
+            // console.log("tam_ LL ", account, account.account_name, JSON.stringify(account, null, 2));
+            console.log("tam_ LL ", JSON.stringify(account, null, 2));
             return <ShowForm account={account}/>
+          })}
+        </GridContainer>
+
+        <GridContainer>
+          {this.props.historys.map(history => {
+
+            // console.log("tam_ LL ", account, account.account_name, JSON.stringify(account, null, 2));
+            console.log("tam_ LL ", JSON.stringify(history, null, 2));
+            return <ShowHistory history={history}/>
           })}
         </GridContainer>
 
@@ -61,13 +72,13 @@ export class SearchAccount extends React.Component {
 
 const mapStateToProps = createStructuredSelector({
   accounts: makeSelectSearchAccounts(),
+  historys: makeSelectSearchHistory(),
   loading: makeSelectSearchLoading(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
     handleAccountName: form => dispatch(lookupAccount(form)),
-    // handleAccountName: form => dispatch(lookupAccount("123eosgui123")),
     // handlePublicKey: form => dispatch(lookupPubkey(form.publicKey)),
 
     

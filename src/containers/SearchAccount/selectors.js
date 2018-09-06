@@ -19,12 +19,15 @@ const makeSelectSearchPubkey = () => createSelector(selectDomain, substate => su
 
 const makeSelectSearchAccounts = () => createSelector(selectDomain, substate => substate.get('accounts'));
 
+const makeSelectSearchHistory = () => createSelector(selectDomain, substate => substate.get('history'));
+
 const makeSelectSearchLoading = () => createSelector(selectDomain, substate => substate.get('loading'));
 
 export default makeSelectSearchAccounts;
 export {
   selectDomain,
   makeSelectSearchName,
+  makeSelectSearchHistory,
   makeSelectSearchPubkey,
   makeSelectSearchAccounts,
   makeSelectSearchLoading,
