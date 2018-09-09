@@ -23,6 +23,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 
 import GridContainer from '../../components/GridContainer'
+import ShowAccountHistory from '../../components/ShowAccountHistory/ShowAccountHistory';
 function LoadingSpinner(props) {
   if (props.loading) {
     return <CircularProgress color="secondary" />;
@@ -59,8 +60,46 @@ export class SearchAccount extends React.Component {
           {this.props.historys.map(history => {
 
             // console.log("tam_ LL ", account, account.account_name, JSON.stringify(account, null, 2));
-            console.log("tam_ LL ", JSON.stringify(history, null, 2));
-            return <ShowHistory history={history}/>
+            // console.log("tam_ LL ", JSON.stringify(history, null, 2));
+
+             
+
+            // console.log("tam_ ", history.actions.map( action_trace => {
+
+              // console.log("render", action_trace.action_trace);
+              // console.log("render__name", action_trace.action_trace.act.name);
+
+              // if(action_trace.action_trace.act.name == "transfer") //claimrewards,approve,newaccount, buyrambytes, delegatebw
+              // {
+              //   console.log("render from", action_trace.action_trace.act.data.from);
+              //   console.log("render to", action_trace.action_trace.act.data.to);
+              //   console.log("render quantity", action_trace.action_trace.act.data.quantity);
+              // }
+
+              // if (action_trace.action_trace.act.name == "transfer") {
+              //   console.log("render from", action_trace.action_trace.act.data.from);
+              //   console.log("render to", action_trace.action_trace.act.data.to);
+              //   console.log("render quantity", action_trace.action_trace.act.data.quantity);
+              // }
+              // return <ShowAccountHistory history={action_trace.action_trace}/>
+
+
+
+            // }
+
+            // ));
+
+
+
+
+
+
+
+
+
+
+
+            return <ShowAccountHistory history={history}/>
           })}
         </GridContainer>
 
@@ -78,7 +117,8 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    handleAccountName: form => dispatch(lookupAccount(form)),
+    // handleAccountName: form => dispatch(lookupAccount(form)),
+    handleAccountName: form => dispatch(lookupAccount("eoslaomaocom")),
     // handlePublicKey: form => dispatch(lookupPubkey(form.publicKey)),
 
     

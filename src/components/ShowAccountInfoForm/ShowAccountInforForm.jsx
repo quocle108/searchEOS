@@ -43,19 +43,19 @@ const ShowAccountInforForm = props => {
                 <Grid item xs={12} className={classes.layoutInfor}>
                     <Grid container item xs={12} direction="row">
                         <Grid item xs={4} ><b>RAM:</b></Grid>
-                        <Grid item xs={8} justify="flex-end">{account.ram_usage}/{account.ram_quota} bytes </Grid>
+                        <Grid >{account.ram_usage}/{account.ram_quota} bytes </Grid>
                     </Grid>
                     <CustomLinearProgress variant="determinate" color="success" value={account.ram_usage/account.ram_quota*100}/>
 
                     <Grid container item xs={12} direction="row">
                         <Grid item xs={4} ><b>CPU:</b></Grid>
-                        <Grid item xs={8} justify="flex-end">{account.total_resources.cpu_weight}({(account.cpu_limit.used/account.cpu_limit.available*100).toFixed(2)}% used) </Grid>
+                        <Grid >{account.total_resources.cpu_weight}({(account.cpu_limit.used/account.cpu_limit.available*100).toFixed(2)}% used) </Grid>
                     </Grid>
                     <CustomLinearProgress variant="determinate" color="info" value={account.cpu_limit.used/account.cpu_limit.available*100}/>
 
                     <Grid container item xs={12} direction="row">
                         <Grid item xs={4} ><b>NET:</b></Grid>
-                        <Grid item xs={8} justify="flex-end">{account.total_resources.net_weight}({(account.net_limit.used/account.net_limit.available*100).toFixed(2)}% used)</Grid>
+                        <Grid item xs={8}>{account.total_resources.net_weight}({(account.net_limit.used/account.net_limit.available*100).toFixed(2)}% used)</Grid>
                     </Grid>
                     <CustomLinearProgress variant="determinate" color="warning" value={account.net_limit.used/account.net_limit.available*100}/>           
                 </Grid>

@@ -14,6 +14,7 @@ import configureStore from './configureStore';
 
 import SearchAccount from './containers/SearchAccount/index'
 // import ShowAccountInforForm from './components/ShowAccountInfoForm/ShowAccountInforForm'
+import ShowAccountHistory from './components/ShowAccountHistory/ShowAccountHistory'
 
 // Create redux store with history
 const initialState = {};
@@ -28,6 +29,7 @@ ReactDOM.render(
             {/* <App /> */}
             <SearchAccount/>
             {/* <ShowAccountInforForm/> */}
+            {/* <ShowAccountHistory/> */}
         </ConnectedRouter>
     </Provider>,
     MOUNT_NODE
