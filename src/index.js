@@ -13,6 +13,7 @@ import App from './containers/App/App'
 import configureStore from './configureStore';
 
 import SearchAccount from './containers/SearchAccount/index'
+// import ShowAccountInforForm from './components/ShowAccountInfoForm/ShowAccountInforForm'
 
 // Create redux store with history
 const initialState = {};
@@ -26,6 +27,7 @@ ReactDOM.render(
         <ConnectedRouter history={history}>
             {/* <App /> */}
             <SearchAccount/>
+            {/* <ShowAccountInforForm/> */}
         </ConnectedRouter>
     </Provider>,
     MOUNT_NODE

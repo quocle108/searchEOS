@@ -17,7 +17,7 @@ import { lookupAccount, lookupPubkey } from './actions';
 import { makeSelectSearchAccounts, makeSelectSearchLoading, makeSelectSearchHistory } from './selectors';
 
 import TestForm from '../../components/testForm'
-import ShowForm from '../../components/showForm'
+import ShowAccountInforForm from "../../components/ShowAccountInfoForm/ShowAccountInforForm"
 import ShowHistory from '../../components/showHistory'
 import CircularProgress from '@material-ui/core/CircularProgress';
 
@@ -50,8 +50,8 @@ export class SearchAccount extends React.Component {
           {this.props.accounts.map(account => {
 
             // console.log("tam_ LL ", account, account.account_name, JSON.stringify(account, null, 2));
-            console.log("tam_ LL ", JSON.stringify(account, null, 2));
-            return <ShowForm account={account}/>
+            // console.log("tam_ LL ", JSON.stringify(account, null, 2));
+            return <ShowAccountInforForm account={account}/>
           })}
         </GridContainer>
 

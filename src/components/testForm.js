@@ -1,32 +1,6 @@
 /*eslint-disable no-unused-vars */
 import React from 'react'
 
-// const TestForm = props => {
-//   const {
-//     handleAccountName,
-//     name,
-//   } = props
-
-//   function onChangeText(event) {
-//      console.log("handleChangeText ", event.target.value);
-//     //  setState({ name: event.target.value });
-
-//   }
-
-//   return (
-//     <div>
-//       <input
-//       type="text"
-//       value = {name}
-//       onChange={onChangeText}
-//       />
-//       <button onClick={handleAccountName}>
-//         Test Function
-//     </button>
-
-//     </div>
-//   )
-// }
 class TestForm extends React.Component {
 
   constructor(props) {
@@ -60,7 +34,6 @@ class TestForm extends React.Component {
           type="text"
           onChange={this.onChangeText}
         />
-
         <button onClick={this.handleClick}>
           Search
       </button>
