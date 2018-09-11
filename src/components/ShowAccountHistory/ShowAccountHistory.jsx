@@ -186,10 +186,12 @@ import GridContainer from '../GridContainer';
 
 // ShowAccountHistoryToolbar = withStyles(toolbarStyles)(ShowAccountHistoryToolbar);
 
+
 const styles = theme => ({
   root: {
     width: '100%',
-    marginTop: theme.spacing.unit * 3,
+    marginTop: theme.spacing.unit,
+    marginLeft: theme.spacing.unit * 2,
   },
   table: {
     minWidth: 1020,
@@ -199,6 +201,44 @@ const styles = theme => ({
   },
 });
 
+const TransferForm = props => {
+  const {from, to, quantity, memo} = props;
+  return(
+    <Typography>
+      <pre> Transfer {quantity} From {from} To {to} Note"{memo}" </pre>
+       <hr/>
+    </Typography>
+  )
+}
+
+const BuyRamByte = props => {
+  const {payer, receiver, bytes} = props;
+  return(
+    <Typography>
+      <pre> BuyRam: {payer} buy {bytes} bytes Ram From {receiver} </pre>
+       <hr/>
+    </Typography>
+  )
+}
+const DelegatebwForm = props => {
+  const {from, receiver, stakeCpuQuantity, stakeNetQuantity} = props;
+  return(
+    <Typography>
+      <pre> Delegatebw: From {from} receiver {receiver} with {stakeCpuQuantity} stakeCpuQuantity and {stakeNetQuantity} stakeNetQuantity </pre>
+      <hr/>
+    </Typography>
+  )
+}
+const ClaimRewardsForm = props => {
+  const {owner} = props;
+  return(
+    <Typography>
+      <pre> ClaimRewards: {owner}  claimed block producer rewards</pre>
+       <hr/>
+    </Typography>
+  )
+}
+
 const ShowAccountHistory = props => {
   const { classes, history } = props;
 
@@ -207,15 +247,43 @@ const ShowAccountHistory = props => {
           <GridContainer>
             {/* <pre>{JSON.stringify(history, null, 2)}</pre> */}
             {
-              history.actions.map(p =>{
+              history.actions.map((p) =>{
                 console.log("tam __", p);
                 return(
                   <div>
+
                     {/* <pre>{JSON.stringify(p, null, 2)}</pre> */}
-                    {p.action_trace.act.data.from} --->
-                    {p.action_trace.act.data.to}=====
-                    {p.action_trace.act.data.quantity}
-                    <hr/>
+                    <p className={classes.root}>
+
+                      {
+                      p.action_trace.act.name === 'transfer'? <TransferForm
+                      from={p.action_trace.act.data.from}
+                      to={p.action_trace.act.data.to}
+                      quantity={p.action_trace.act.data.quantity}
+                      memo={p.action_trace.act.data.memo}/> : ''
+                      }
+                      {
+                        p.action_trace.act.name === 'buyrambytes'? <BuyRamByte
+                        payer={p.action_trace.act.data.payer}
+                        receiver={p.action_trace.act.data.receiver}
+                        bytes={p.action_trace.act.data.bytes}
+                        />:''
+                      }
+                      {
+                        p.action_trace.act.name === 'delegatebw'? <DelegatebwForm
+                        from={p.action_trace.act.data.from}
+                        receiver={p.action_trace.act.data.receiver}
+                        stakeCpuQuantity={p.action_trace.act.data.stake_cpu_quantity}
+                        stakeNetQuantity={p.action_trace.act.data.stake_net_quantity}
+                        />:''
+                      }
+                      {
+                        p.action_trace.act.name === 'claimrewards'? <ClaimRewardsForm
+                        owner={p.action_trace.act.data.owner}
+                        />:''
+                      }
+                    </p>
+
                   </div>
                 
               )
