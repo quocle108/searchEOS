@@ -19,6 +19,8 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import { lighten } from '@material-ui/core/styles/colorManipulator';
 import GridContainer from '../GridContainer';
+// import Button from '../CustomButtons/Button';
+import Button from '@material-ui/core/Button';
 
 // let counter = 0;
 // function createData(Date, Name, Data, Notes) {
@@ -186,10 +188,12 @@ import GridContainer from '../GridContainer';
 
 // ShowAccountHistoryToolbar = withStyles(toolbarStyles)(ShowAccountHistoryToolbar);
 
+
 const styles = theme => ({
   root: {
     width: '100%',
-    marginTop: theme.spacing.unit * 3,
+    marginTop: theme.spacing.unit,
+    marginLeft: theme.spacing.unit * 2,
   },
   table: {
     minWidth: 1020,
@@ -199,34 +203,141 @@ const styles = theme => ({
   },
 });
 
+const TransferForm = props => {
+  const { id, time, from, to, quantity, memo } = props;
+  return (
+    <TableRow key={id}>
+      <TableCell >{time}</TableCell>
+      <TableCell >{"Transfer"}</TableCell>
+      <TableCell >{from} to {to} with {quantity}</TableCell>
+      <TableCell >{memo}</TableCell>
+    </TableRow >
+  )
+}
+
+const BuyRamByte = props => {
+  const { id, time, payer, receiver, bytes } = props;
+  return (
+    <TableRow key={id}>
+      <TableCell >{time}</TableCell>
+      <TableCell >{"Buy RAM"}</TableCell>
+      <TableCell> buy {bytes} bytes</TableCell>
+      <TableCell >{""}</TableCell>
+    </TableRow>
+  )
+}
+const StyledButton = withStyles({
+  root: {
+    borderRadius: 5,
+    color: 'white',
+  },
+  label: {
+    textTransform: 'capitalize',
+  },
+})(Button);
+
+const DelegatebwForm = props => {
+  const { classes, id, time, from, receiver, stakeCpuQuantity, stakeNetQuantity } = props;
+  return (
+    <TableRow key={id}>
+      <TableCell >{time}</TableCell>
+      <TableCell ><StyledButton variant="outlined">Delegatebw</StyledButton></TableCell>
+      <TableCell> From {from} receiver {receiver} with {stakeCpuQuantity} stakeCpuQuantity and {stakeNetQuantity} stakeNetQuantity</TableCell>
+      <TableCell >{""}</TableCell>
+    </TableRow>
+
+  )
+}
+const ClaimRewardsForm = props => {
+  const { id, time, owner } = props;
+  return (
+    <TableRow key={id}>
+      <TableCell >{time}</TableCell>
+      <TableCell >{"ClaimRewards"}</TableCell>
+      <TableCell> {owner}  claimed block producer rewards</TableCell>
+      <TableCell >{""}</TableCell>
+    </TableRow>
+  )
+}
+
 const ShowAccountHistory = props => {
   const { classes, history } = props;
 
   return (
-      <div>
-          <GridContainer>
-            {/* <pre>{JSON.stringify(history, null, 2)}</pre> */}
-            {
-              history.actions.map(p =>{
-                console.log("tam __", p);
-                return(
-                  <div>
-                    {/* <pre>{JSON.stringify(p, null, 2)}</pre> */}
-                    {p.action_trace.act.data.from} --->
-                    {p.action_trace.act.data.to}=====
-                    {p.action_trace.act.data.quantity}
-                    <hr/>
-                  </div>
-                
-              )
-                
-              })
+    <div>
+      <GridContainer>
+        {
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>Date</TableCell>
+                <TableCell>Name</TableCell>
+                <TableCell>Data</TableCell>
+                <TableCell>Memo</TableCell>
+              </TableRow>
+            </TableHead>
 
-            }
+            <TableBody>
+              {
+                history.actions.map((p, id) => {
+                  return (
+                    p.action_trace.act.name === 'transfer' ? <TransferForm
+                      id={id}
+                      time={p.block_time}
+                      from={p.action_trace.act.data.from}
+                      to={p.action_trace.act.data.to}
+                      quantity={p.action_trace.act.data.quantity}
+                      memo={p.action_trace.act.data.memo}
+                    /> : ''
+                  );
+                })
+              }
+              {
+                history.actions.map((p, id) => {
+                  return (
+                    p.action_trace.act.name === 'buyrambytes' ? <BuyRamByte
+                      id={id}
+                      time={p.block_time}
+                      payer={p.action_trace.act.data.payer}
+                      receiver={p.action_trace.act.data.receiver}
+                      bytes={p.action_trace.act.data.bytes}
+                    /> : ''
+                  );
+                })
+              }
+              {
+                history.actions.map((p, id) => {
+                  return (
+                    p.action_trace.act.name === 'delegatebw' ? <DelegatebwForm
+                      id={id}
+                      time={p.block_time}
+                      from={p.action_trace.act.data.from}
+                      receiver={p.action_trace.act.data.receiver}
+                      stakeCpuQuantity={p.action_trace.act.data.stake_cpu_quantity}
+                      stakeNetQuantity={p.action_trace.act.data.stake_net_quantity}
+                    /> : ''
+                  );
+                })
+              }
+              {
+                history.actions.map((p, id) => {
+                  return (
+                    p.action_trace.act.name === 'claimrewards' ? <ClaimRewardsForm
+                      id={id}
+                      time={p.block_time}
+                      owner={p.action_trace.act.data.owner}
+                    /> : ''
+                  );
+                })
+              }
+            </TableBody>
+          </Table>
 
-       </GridContainer>
+        }
 
-      </div>
+      </GridContainer>
+
+    </div>
   )
 }
 

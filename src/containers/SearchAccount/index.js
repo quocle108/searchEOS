@@ -47,16 +47,16 @@ export class SearchAccount extends React.Component {
         <TestForm{...this.props} />
 
         <LoadingSpinner {...this.props} />
-        <GridContainer>
+        <div>
           {this.props.accounts.map(account => {
 
             // console.log("tam_ LL ", account, account.account_name, JSON.stringify(account, null, 2));
             // console.log("tam_ LL ", JSON.stringify(account, null, 2));
             return <ShowAccountInforForm account={account}/>
           })}
-        </GridContainer>
+        </div>
 
-        <GridContainer>
+        <div>
           {this.props.historys.map(history => {
 
             // console.log("tam_ LL ", account, account.account_name, JSON.stringify(account, null, 2));
@@ -89,19 +89,9 @@ export class SearchAccount extends React.Component {
 
             // ));
 
-
-
-
-
-
-
-
-
-
-
             return <ShowAccountHistory history={history}/>
           })}
-        </GridContainer>
+        </div>
 
         
       </div>
