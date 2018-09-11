@@ -204,6 +204,7 @@ const styles = theme => ({
 });
 
 const TransferForm = props => {
+<<<<<<< HEAD
   const { id, time, from, to, quantity, memo } = props;
   return (
     <TableRow key={id}>
@@ -212,10 +213,19 @@ const TransferForm = props => {
       <TableCell >{from} to {to} with {quantity}</TableCell>
       <TableCell >{memo}</TableCell>
     </TableRow >
+=======
+  const {from, to, quantity, memo} = props;
+  return(
+    <Typography>
+      <pre> Transfer {quantity} From {from} To {to} Note"{memo}" </pre>
+       <hr/>
+    </Typography>
+>>>>>>> af541a1f133cb07653bd2e0d1c6185f449651df9
   )
 }
 
 const BuyRamByte = props => {
+<<<<<<< HEAD
   const { id, time, payer, receiver, bytes } = props;
   return (
     <TableRow key={id}>
@@ -257,6 +267,32 @@ const ClaimRewardsForm = props => {
       <TableCell> {owner}  claimed block producer rewards</TableCell>
       <TableCell >{""}</TableCell>
     </TableRow>
+=======
+  const {payer, receiver, bytes} = props;
+  return(
+    <Typography>
+      <pre> BuyRam: {payer} buy {bytes} bytes Ram From {receiver} </pre>
+       <hr/>
+    </Typography>
+  )
+}
+const DelegatebwForm = props => {
+  const {from, receiver, stakeCpuQuantity, stakeNetQuantity} = props;
+  return(
+    <Typography>
+      <pre> Delegatebw: From {from} receiver {receiver} with {stakeCpuQuantity} stakeCpuQuantity and {stakeNetQuantity} stakeNetQuantity </pre>
+      <hr/>
+    </Typography>
+  )
+}
+const ClaimRewardsForm = props => {
+  const {owner} = props;
+  return(
+    <Typography>
+      <pre> ClaimRewards: {owner}  claimed block producer rewards</pre>
+       <hr/>
+    </Typography>
+>>>>>>> af541a1f133cb07653bd2e0d1c6185f449651df9
   )
 }
 
@@ -264,6 +300,7 @@ const ShowAccountHistory = props => {
   const { classes, history } = props;
 
   return (
+<<<<<<< HEAD
     <div>
       <GridContainer>
         {
@@ -338,6 +375,60 @@ const ShowAccountHistory = props => {
       </GridContainer>
 
     </div>
+=======
+      <div>
+          <GridContainer>
+            {/* <pre>{JSON.stringify(history, null, 2)}</pre> */}
+            {
+              history.actions.map((p) =>{
+                console.log("tam __", p);
+                return(
+                  <div>
+
+                    {/* <pre>{JSON.stringify(p, null, 2)}</pre> */}
+                    <p className={classes.root}>
+
+                      {
+                      p.action_trace.act.name === 'transfer'? <TransferForm
+                      from={p.action_trace.act.data.from}
+                      to={p.action_trace.act.data.to}
+                      quantity={p.action_trace.act.data.quantity}
+                      memo={p.action_trace.act.data.memo}/> : ''
+                      }
+                      {
+                        p.action_trace.act.name === 'buyrambytes'? <BuyRamByte
+                        payer={p.action_trace.act.data.payer}
+                        receiver={p.action_trace.act.data.receiver}
+                        bytes={p.action_trace.act.data.bytes}
+                        />:''
+                      }
+                      {
+                        p.action_trace.act.name === 'delegatebw'? <DelegatebwForm
+                        from={p.action_trace.act.data.from}
+                        receiver={p.action_trace.act.data.receiver}
+                        stakeCpuQuantity={p.action_trace.act.data.stake_cpu_quantity}
+                        stakeNetQuantity={p.action_trace.act.data.stake_net_quantity}
+                        />:''
+                      }
+                      {
+                        p.action_trace.act.name === 'claimrewards'? <ClaimRewardsForm
+                        owner={p.action_trace.act.data.owner}
+                        />:''
+                      }
+                    </p>
+
+                  </div>
+                
+              )
+                
+              })
+
+            }
+
+       </GridContainer>
+
+      </div>
+>>>>>>> af541a1f133cb07653bd2e0d1c6185f449651df9
   )
 }
 
