@@ -52,6 +52,7 @@ export class SearchAccount extends React.Component {
 
             // console.log("tam_ LL ", account, account.account_name, JSON.stringify(account, null, 2));
             // console.log("tam_ LL ", JSON.stringify(account, null, 2));
+            console.log("tam_ LL ", account);
             return <ShowAccountInforForm account={account}/>
           })}
         </div>
