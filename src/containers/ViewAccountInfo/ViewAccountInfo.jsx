@@ -8,11 +8,11 @@ import SearchAccount from '../SearchAccount/index'
 
 const styles = theme => ({
   root: {
-    flex: 1, 
+    // flex: 1, 
   },
   searchBar:{
-    align: "center",
-    margin: "auto",
+    // align: "center",
+    // margin: "auto",
   },
 });
 
@@ -29,16 +29,13 @@ class ViewAccountInfo extends React.Component {
 
   render() {
     const { classes } = this.props;
-    const { spacing } = this.state;
 
     return (
-      <Grid container className={classes.root} spacing={16}>
-        <Grid item xs={12} direction="column" justify="center" alignItems="center" >
-          <Grid item className={classes.searchBar}>
+      <Grid container item className={classes.root} spacing={16} direction="row" justify="center"alignItems="center">
+        <Grid className={classes.searchBar} >
             <SearchAccount />
-          </Grid>
-
         </Grid>
+
       </Grid>
     );
   }

@@ -38,13 +38,13 @@ class SearchAccountBar extends React.Component {
 
 
   onChangeText(e) {
-    console.log("tam_ onChangeText ", e.target.value);
+    // console.log("tam_ onChangeText ", e.target.value);
     this.setState({ name: e.target.value });
 
 
   };
   handleClick(e) {
-    console.log("tam_ handle click ", this.state.name);
+    // console.log("tam_ handle click ", this.state.name);
     this.props.handleAccountName(this.state.name);
   }
 

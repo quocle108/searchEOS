@@ -31,7 +31,7 @@ class ShowAccountInforForm extends React.Component {
         fetch('https://api.coinmarketcap.com/v2/ticker/1765/')
             .then(results => results.json())
             .then(data => {
-                console.log("tam__", data.data.quotes.USD.price);
+                // console.log("tam__", data.data.quotes.USD.price);
                 this.setState({ data: data.data.quotes.USD.price })
             });
     };

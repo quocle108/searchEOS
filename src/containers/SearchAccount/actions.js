@@ -26,11 +26,12 @@ export function lookupLoading() {
   };
 }
 
-export function lookupLoaded(accounts, historys) {
+export function lookupLoaded(accounts, historys, tokenBalances) {
   return {
     type: LOOKUP_LOADED,
     accounts,
     historys,
+    tokenBalances,
   };
 }
 

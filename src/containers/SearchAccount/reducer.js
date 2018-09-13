@@ -13,6 +13,7 @@ const initialState = fromJS({
   loading: false,
   accounts: [],
   history: [],
+  tokenBalance:[],
 });
 
 function SearchAccountReducer(state = initialState, action) {
@@ -24,12 +25,15 @@ function SearchAccountReducer(state = initialState, action) {
     case LOOKUP_LOADING:
       return state.set('loading', true);
     case LOOKUP_LOADED: {
-      const { accounts, historys } = action;
+      const { accounts, historys, tokenBalances } = action;
       // casting account in an array if API returned an object
       const accountState = Array.isArray(accounts) ? accounts : [accounts];
       const historysState = Array.isArray(historys) ? historys : [historys];
+      const tokenBalancesState = Array.isArray(tokenBalances) ? tokenBalances : [tokenBalances];
 
-      return state.set('accounts', accountState).set('loading', false).set('history', historysState);
+      return state.set('accounts', accountState).set('loading', false)
+      .set('history', historysState)
+      .set('tokenBalance',tokenBalancesState);
     }
     default:
       return state;

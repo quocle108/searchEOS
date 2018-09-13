@@ -14,12 +14,13 @@ import injectReducer from 'utils/injectReducer';
 import reducer from './reducer';
 import saga from './saga';
 import { lookupAccount, lookupPubkey } from './actions';
-import { makeSelectSearchAccounts, makeSelectSearchLoading, makeSelectSearchHistory } from './selectors';
+import { makeSelectSearchAccounts, makeSelectSearchLoading, makeSelectSearchHistory, makeSelectSearchTokenBalance } from './selectors';
 
 import Grid from '@material-ui/core/Grid';
 
 import SearchAccountBar from '../../components/SearchAccountBar'
 import ShowAccountInforForm from "../../components/ShowAccountInfoForm/ShowAccountInforForm"
+import ShowTokeBalance from "../../components/ShowTokenBalance/ShowTokenBalance"
 import ShowHistory from '../../components/showHistory'
 import CircularProgress from '@material-ui/core/CircularProgress';
 
@@ -77,6 +78,14 @@ export class SearchAccount extends React.Component {
                     return <ShowAccountHistory history={history} />
                 })}
               </Grid>
+              <Grid item>
+                {
+                  this.props.tokenBalances.map(tokenData => {
+                    console.log("tam_ tokenBalance.map(tokenBalance ", tokenData);
+                    if(tokenData)
+                    return <ShowTokeBalance tokenBalance={tokenData}/>
+                })}
+              </Grid>
 
             </Grid>
 
@@ -92,13 +101,14 @@ export class SearchAccount extends React.Component {
 const mapStateToProps = createStructuredSelector({
   accounts: makeSelectSearchAccounts(),
   historys: makeSelectSearchHistory(),
+  tokenBalances: makeSelectSearchTokenBalance(),
   loading: makeSelectSearchLoading(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
     // handleAccountName: form => dispatch(lookupAccount(form)),
-    handleAccountName: form => dispatch(lookupAccount("eoslaomaocom")),
+    handleAccountName: form => dispatch(lookupAccount("zbeosbp11111")),
     // handlePublicKey: form => dispatch(lookupPubkey(form.publicKey)),
 
 
