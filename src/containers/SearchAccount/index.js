@@ -16,7 +16,7 @@ import saga from './saga';
 import { lookupAccount, lookupPubkey } from './actions';
 import { makeSelectSearchAccounts, makeSelectSearchLoading, makeSelectSearchHistory } from './selectors';
 
-import TestForm from '../../components/testForm'
+import SearchAccountBar from '../../components/SearchAccountBar'
 import ShowAccountInforForm from "../../components/ShowAccountInfoForm/ShowAccountInforForm"
 import ShowHistory from '../../components/showHistory'
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -44,7 +44,7 @@ export class SearchAccount extends React.Component {
   render() {
     return (
       <div>
-        <TestForm{...this.props} />
+        <SearchAccountBar{...this.props} />
 
         <LoadingSpinner {...this.props} />
         <div>
@@ -73,8 +73,8 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    handleAccountName: form => dispatch(lookupAccount(form)),
-    // handleAccountName: form => dispatch(lookupAccount("eoslaomaocom")),
+    // handleAccountName: form => dispatch(lookupAccount(form)),
+    handleAccountName: form => dispatch(lookupAccount("eoslaomaocom")),
     // handlePublicKey: form => dispatch(lookupPubkey(form.publicKey)),
 
     
