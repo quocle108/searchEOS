@@ -26,8 +26,8 @@ const MOUNT_NODE = document.getElementById('root');
 ReactDOM.render(
     <Provider store={store}>
         <ConnectedRouter history={history}>
-            {/* <App /> */}
-            <SearchAccount/>
+            <App />
+            {/* <SearchAccount/> */}
             {/* <ShowAccountInforForm/> */}
             {/* <ShowAccountHistory/> */}
         </ConnectedRouter>

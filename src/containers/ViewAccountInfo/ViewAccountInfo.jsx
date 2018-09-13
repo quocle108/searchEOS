@@ -8,21 +8,11 @@ import SearchAccount from '../SearchAccount/index'
 
 const styles = theme => ({
   root: {
-    flexGrow: 1,
+    flex: 1, 
   },
-  paper: {
-    height: 350,
-    width: 600,
-  },
-  history: {
-    padding: '50px',
-    margin: ' 20px auto',
-    maxWidth: '80%',
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-  },
-  control: {
-    padding: theme.spacing.unit * 2,
+  searchBar:{
+    align: "center",
+    margin: "auto",
   },
 });
 
@@ -43,22 +33,12 @@ class ViewAccountInfo extends React.Component {
 
     return (
       <Grid container className={classes.root} spacing={16}>
-        <Grid item xs={12}>
-          <Grid container className={classes.demo} justify="center" spacing={Number(spacing)}>
-
-              <Grid key={0} item>
-                <Paper className={classes.paper} />
-              </Grid>
-              <Grid key={1} item>
-                <Paper className={classes.paper} />
-              </Grid>
+        <Grid item xs={12} direction="column" justify="center" alignItems="center" >
+          <Grid item className={classes.searchBar}>
+            <SearchAccount />
           </Grid>
-          <Grid item xs={12}>
-          <Paper className={classes.history}>ViewAccountInfo</Paper>
-          <SearchAccount/>
-        </Grid>
-        </Grid>
 
+        </Grid>
       </Grid>
     );
   }

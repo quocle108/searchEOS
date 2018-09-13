@@ -16,6 +16,8 @@ import saga from './saga';
 import { lookupAccount, lookupPubkey } from './actions';
 import { makeSelectSearchAccounts, makeSelectSearchLoading, makeSelectSearchHistory } from './selectors';
 
+import Grid from '@material-ui/core/Grid';
+
 import SearchAccountBar from '../../components/SearchAccountBar'
 import ShowAccountInforForm from "../../components/ShowAccountInfoForm/ShowAccountInforForm"
 import ShowHistory from '../../components/showHistory'
@@ -33,7 +35,7 @@ function LoadingSpinner(props) {
 
 // eslint-disable-next-line react/prefer-stateless-function
 export class SearchAccount extends React.Component {
-  constructor(props, context){
+  constructor(props, context) {
     super(props, context);
     this.state = {
       value: ''
@@ -44,22 +46,44 @@ export class SearchAccount extends React.Component {
   render() {
     return (
       <div>
-        <SearchAccountBar{...this.props} />
 
-        <LoadingSpinner {...this.props} />
-        <div>
-          {this.props.accounts.map(account => {
-            if(account)
-            return <ShowAccountInforForm account={account}/>
-          })}
-        </div>
+        <Grid container >
+          <Grid item xs={12} direction={"row"} justify={"center"}>
 
-        <div>
-          {this.props.historys.map(history => {
-            if(history)
-            return <ShowAccountHistory history={history}/>
-          })}
-        </div>        
+            <Grid container
+              spacing={8}
+              alignItems={"center"}
+              direction={"column"}
+              justify={"flex-end"}>
+
+              <Grid item>
+                <SearchAccountBar{...this.props} />
+              </Grid>
+
+              <Grid item>
+                <LoadingSpinner {...this.props} />
+              </Grid>
+
+              <Grid item>
+                {this.props.accounts.map(account => {
+                  if (account)
+                    return <ShowAccountInforForm account={account} />
+                })}
+
+              </Grid>
+              <Grid item>
+                {this.props.historys.map(history => {
+                  if (history)
+                    return <ShowAccountHistory history={history} />
+                })}
+              </Grid>
+
+            </Grid>
+
+          </Grid>
+        </Grid>
+
+
       </div>
     );
   };
@@ -77,7 +101,7 @@ function mapDispatchToProps(dispatch) {
     handleAccountName: form => dispatch(lookupAccount("eoslaomaocom")),
     // handlePublicKey: form => dispatch(lookupPubkey(form.publicKey)),
 
-    
+
   };
 }
 

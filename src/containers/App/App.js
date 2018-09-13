@@ -24,7 +24,6 @@ export default function App() {
           transferTokenTab={<ViewTransferToken />}
           contractTab={<ViewContract />}
         />
-        {/* <ViewAccountInfo /> */}
         <Footer/>
 
       </div>      

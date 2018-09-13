@@ -60,15 +60,15 @@ class ViewButtonNavigation extends React.Component {
             textColor="primary"
             wrapper
           >
-            <Tab label="New Account" />
-            <Tab label="Account Info"  />
+            <Tab label="Account Info" />
+            <Tab label="New Account"  />
             <Tab label="Transfet Token"  />
             <Tab label="Contract"  />
 
           </Tabs>
         </AppBar>
-        {value === 0 && <TabContainer><div className={classes.appResponsive}>{newAccountTab}</div></TabContainer>}
-        {value === 1 && <TabContainer><div className={classes.appResponsive}>{accountInfoTab}</div></TabContainer>}
+        {value === 1 && <TabContainer><div className={classes.appResponsive}>{newAccountTab}</div></TabContainer>}
+        {value === 0 && <TabContainer><div className={classes.appResponsive}>{accountInfoTab}</div></TabContainer>}
         {value === 2 && <TabContainer><div className={classes.appResponsive}>{transferTokenTab}</div></TabContainer>}
         {value === 3 && <TabContainer><div className={classes.appResponsive}>{contractTab}</div></TabContainer>}
 
