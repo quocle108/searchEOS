@@ -8,10 +8,11 @@ import Eos from 'eosjs';
 const networkOptions = {
   broadcast: false,
   sign: false,
+  // chainId: 'aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906',
   chainId: 'aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906',
-  httpEndpoint: 'https://api.eosnewyork.io:443',
+  // httpEndpoint: 'https://api.eosnewyork.io:443',
+  httpEndpoint: 'https://nodes.get-scatter.com:443',
 };
-
 
 // function* getCurrency(token, name) {
 // }
@@ -30,6 +31,7 @@ function* fetchTokenInfo(reader, account, symbol) {
     if (symbol === 'OCT') throw { message: 'OCT has no STATS table - please fix!' };
     const stats = yield reader.getCurrencyStats(account, symbol);
     const precision = stats[symbol].max_supply.split(' ')[0].split('.')[1].length;
+    console.log("tam_ precision", precision);
     return {
       account,
       symbol,
@@ -56,13 +58,14 @@ function* fetchTokens(reader) {
       },
       ...list
     ]
+    console.log("tam_ tokenList", tokenList);
     const info = yield all(
       tokenList.map(token => {
-        console.log("tam_ net", token);
         return fork(fetchTokenInfo, reader, token.account, token.symbol);
       })
     );
     const tokens = yield join(...info);
+    console.log("tam_ tokens", tokens);
     return tokens;
   } catch (err) {
     console.error('An EOSToolkit error occured - see details below:');
@@ -71,8 +74,8 @@ function* fetchTokens(reader) {
   }
 }
 function* getCurrency(token, name) {
-  const networkReader = yield Eos(networkOptions);
   try {
+    const networkReader = yield Eos(networkOptions);
     const currency = yield networkReader.getCurrencyBalance(token, name);
     const currencies = currency.map(c => {
       return {
@@ -80,7 +83,7 @@ function* getCurrency(token, name) {
         balance: c,
       };
     });
-    console.log("tam__getCurrency", currencies);
+    // console.log("tam__getCurrency", currencies);
     return currencies;
   } catch (err) {
     console.error('An EOSToolkit error occured - see details below:');
@@ -126,7 +129,6 @@ function* getToken(name){
 
   const tokens = yield all(
     eosTokens.map(token => {
-      console.log("tam_Tokens: ", token);
       return fork(getCurrency, token.account, name);
     })
   );
@@ -134,7 +136,7 @@ function* getToken(name){
 
   console.log("tam_ currencies", currencies);
   const balances = currencies.reduce((a, b) => a.concat(b), []);
-  console.log("tam_balances", balances);
+  console.log("tam_ balances", balances);
 
   return{
     ...balances
@@ -160,7 +162,7 @@ function* performSearchAccount() {
 
     const tokenBalance = yield call(getToken, accountName);
 
-    console.log("tam_ token final", tokenBalance);
+    // console.log("tam_ token final", tokenBalance);
 
     yield put(lookupLoaded(account, history, tokenBalance));
 

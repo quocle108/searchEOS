@@ -7,7 +7,7 @@ import Divider from "@material-ui/core/Divider"
 import Grid from "@material-ui/core/Grid"
 
 const styles = {
-    root:{
+    root: {
 
     },
 
@@ -25,11 +25,15 @@ const ShowTokenBalace = props => {
             <Divider />
 
             <Grid container item xs={12} direction="row">
-            {
-                console.log("tam_inside ", tokenBalance[0].account)
-            }
-                <Grid item xs={4} ><b>{tokenBalance[0].account}</b></Grid>
-                <Grid > {tokenBalance[0].balance}</Grid>
+                {
+
+                    Object.keys(tokenBalance).map((key) =>{
+                        console.log("tam _ 1", key);
+                        console.log("tam _ 2", tokenBalance[key].account);
+                        return <Grid > {tokenBalance[key].account} : {tokenBalance[key].balance} </Grid>
+                    })
+
+                }
             </Grid>
         </div>
     )

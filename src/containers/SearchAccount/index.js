@@ -66,7 +66,7 @@ export class SearchAccount extends React.Component {
         <Grid xs={6}>
             {
               this.props.tokenBalances.map(tokenData => {
-                console.log("tam_ tokenBalance.map(tokenBalance ", tokenData);
+                // console.log("tam_ tokenBalance.map(tokenBalance ", tokenData);
                 if (tokenData)
                   return <ShowTokeBalance tokenBalance={tokenData} />
               })}
