@@ -61,12 +61,10 @@ export class SearchAccount extends React.Component {
               return <ShowAccountInforForm account={account} />
           })}
         </Grid>
-
         
         <Grid xs={6}>
             {
               this.props.tokenBalances.map(tokenData => {
-                // console.log("tam_ tokenBalance.map(tokenBalance ", tokenData);
                 if (tokenData)
                   return <ShowTokeBalance tokenBalance={tokenData} />
               })}
@@ -94,8 +92,8 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    // handleAccountName: form => dispatch(lookupAccount(form)),
-    handleAccountName: form => dispatch(lookupAccount("zbeosbp11111")),
+    handleAccountName: form => dispatch(lookupAccount(form)),
+    // handleAccountName: form => dispatch(lookupAccount("zbeosbp11111")),
     // handlePublicKey: form => dispatch(lookupPubkey(form.publicKey)),
 
 

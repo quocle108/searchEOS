@@ -11,7 +11,8 @@ const networkOptions = {
   // chainId: 'aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906',
   chainId: 'aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906',
   // httpEndpoint: 'https://api.eosnewyork.io:443',
-  httpEndpoint: 'https://nodes.get-scatter.com:443',
+  // httpEndpoint: 'https://nodes.get-scatter.com:443',
+  httpEndpoint: 'https://api.eosdetroit.io:443',
 };
 
 // function* getCurrency(token, name) {

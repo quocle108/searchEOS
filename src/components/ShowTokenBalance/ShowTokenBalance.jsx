@@ -1,10 +1,12 @@
 /*eslint-disable no-unused-vars */
 import React from 'react'
-import Card from '@material-ui/core/Card';
 import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles';
 import Divider from "@material-ui/core/Divider"
 import Grid from "@material-ui/core/Grid"
+import SvgIcon from '@material-ui/core/SvgIcon';
+import ThreeDRotationIcon from '@material-ui/icons/ThreeDRotation';
+
 
 const styles = {
     root: {
@@ -24,15 +26,17 @@ const ShowTokenBalace = props => {
             </Typography>
             <Divider />
 
-            <Grid container item xs={12} direction="row">
+            <Grid>
                 {
 
-                    Object.keys(tokenBalance).map((key) =>{
-                        console.log("tam _ 1", key);
-                        console.log("tam _ 2", tokenBalance[key].account);
-                        return <Grid > {tokenBalance[key].account} : {tokenBalance[key].balance} </Grid>
+                    Object.keys(tokenBalance).map((key) => {
+                        return <Grid container  xs={12} direction="row">
+                            <Grid item xs={2} ><ThreeDRotationIcon/></Grid>
+                            <Grid item xs={4} ><b>{tokenBalance[key].account} :</b></Grid>
+                            <Grid item xs={6}>{tokenBalance[key].balance}</Grid>
+                            <Divider />
+                        </Grid>
                     })
-
                 }
             </Grid>
         </div>
