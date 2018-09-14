@@ -24,9 +24,8 @@ import ShowTokeBalance from "../../components/ShowTokenBalance/ShowTokenBalance"
 import ShowHistory from '../../components/showHistory'
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-
-import GridContainer from '../../components/GridContainer'
 import ShowAccountHistory from '../../components/ShowAccountHistory/ShowAccountHistory';
+
 function LoadingSpinner(props) {
   if (props.loading) {
     return <CircularProgress color="secondary" />;
@@ -46,54 +45,42 @@ export class SearchAccount extends React.Component {
 
   render() {
     return (
-      <div>
+      <Grid container direction="row" justify="center" alignItems="center">
 
-        <Grid container >
-          <Grid item xs={12} direction={"row"} justify={"center"}>
+        <Grid xs={12}>
+          <SearchAccountBar{...this.props} />
+        </Grid>
 
-            <Grid container
-              spacing={8}
-              alignItems={"center"}
-              direction={"column"}
-              justify={"flex-end"}>
+        <Grid xs={12}>
+          <LoadingSpinner {...this.props} />
+        </Grid>
 
-              <Grid item>
-                <SearchAccountBar{...this.props} />
-              </Grid>
+        <Grid xs={6}>
+          {this.props.accounts.map(account => {
+            if (account)
+              return <ShowAccountInforForm account={account} />
+          })}
+        </Grid>
 
-              <Grid item>
-                <LoadingSpinner {...this.props} />
-              </Grid>
-
-              <Grid item>
-                {this.props.accounts.map(account => {
-                  if (account)
-                    return <ShowAccountInforForm account={account} />
-                })}
-
-              </Grid>
-              <Grid item>
-                {this.props.historys.map(history => {
-                  if (history)
-                    return <ShowAccountHistory history={history} />
-                })}
-              </Grid>
-              <Grid item>
-                {
-                  this.props.tokenBalances.map(tokenData => {
-                    console.log("tam_ tokenBalance.map(tokenBalance ", tokenData);
-                    if(tokenData)
-                    return <ShowTokeBalance tokenBalance={tokenData}/>
-                })}
-              </Grid>
-
-            </Grid>
-
+        
+        <Grid xs={6}>
+            {
+              this.props.tokenBalances.map(tokenData => {
+                console.log("tam_ tokenBalance.map(tokenBalance ", tokenData);
+                if (tokenData)
+                  return <ShowTokeBalance tokenBalance={tokenData} />
+              })}
           </Grid>
+
+        <Grid xs={12}>
+          {this.props.historys.map(history => {
+            if (history)
+              return <ShowAccountHistory history={history} />
+          })}
         </Grid>
 
 
-      </div>
+      </Grid>
     );
   };
 }

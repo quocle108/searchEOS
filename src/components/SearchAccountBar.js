@@ -6,23 +6,17 @@ import Button from '@material-ui/core/Button'
 import Input from '@material-ui/core/Input';
 import { withStyles } from '@material-ui/core/styles';
 
-const ButtonStyle = {
-  borderRadius: 3,
-  backgroundColor: "#ffffff",
-  textTransform: 'capitalize',
-  color: '#4CAF50',
-  border: '2px solid #4CAF50',
-  fontSize: '23px',
-  "&:hover": {
-    color: "#FFFFFF",
-    backgroundColor: "#4CAF50",
-    cursor: 'pointer'
+const styles = {
+  root:{
+    marginBottom: "20px",
+    marginTop:"20px",
   },
+  searchBar: {
+    minWidth: "400px",
+    marginRight: "10px"
+  },
+
 };
-
-const styles = theme => ({
-
-});
 
 class SearchAccountBar extends React.Component {
 
@@ -51,20 +45,19 @@ class SearchAccountBar extends React.Component {
   render() {
     return (
       <div>
-        <Grid container items xs={12} direction="row" justify="center" alignItems="flex-start" spacing={8}>
-          <Grid container justify="center">
-            <Input placeholder="Search Account" type="text" style = {{width: "50%"}}
+          <Grid container justify="center" className={this.props.classes.root}>
+            <Input placeholder="Search Account" type="text"
               inputProps={{
                 'aria-label': 'Description',
               }}
               onChange={this.onChangeText}
+              className={this.props.classes.searchBar}
             />
           <Button variant="contained" color="primary" onClick={this.handleClick} >
               Search
-            </Button>
+          </Button>
 
           </Grid>
-        </Grid>
       </div>
     )
   };
